@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,11 +9,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.kata.spring.boot_security.demo.entity.User;
 import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 
+import javax.persistence.PersistenceContext;
 import java.util.Map;
 
 @Controller
 public class MainController {
-    UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public MainController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     //Todo: Добавить слой сервис - прослойка между репозиторием и контроллером
     @GetMapping("/index")
